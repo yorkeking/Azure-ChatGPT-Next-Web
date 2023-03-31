@@ -24,7 +24,8 @@ const nextConfig = {
         has: [
           {
             type: 'host',
-            value: `(?!${process.env.DOMAIN.replace(/\./g, '\\.')}).*`
+            value: process.env.DOMAIN,
+            not: true
           },
         ],
         permanent: true,
