@@ -16,22 +16,21 @@ const nextConfig = {
     if (!process.env.DOMAIN) {
       return []
     }
-
+  
     return [
       {
         source: '/',
         destination: `https://${process.env.DOMAIN}/`,
-        has: [
+        headers: [
           {
-            type: 'host',
+            key: 'host',
             value: process.env.DOMAIN,
-            not: true
           },
         ],
         permanent: true,
       },
     ]
-  },
+  }
 };
 
 if (process.env.DOCKER) {
