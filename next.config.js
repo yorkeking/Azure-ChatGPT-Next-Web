@@ -23,8 +23,8 @@ const nextConfig = {
         destination: `https://${process.env.DOMAIN}/`,
         missing: [
           {
-            type: 'host',
-            value: process.env.DOMAIN
+            type: 'header',
+            key: 'x-azure-cdn-request'
           },
         ],
         permanent: true,
