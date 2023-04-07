@@ -6,16 +6,6 @@ import "./styles/prism.scss";
 import { SessionProvider } from "next-auth/react";
 import { ACCESS_CODES, IS_IN_DOCKER } from "./api/access";
 
-export const metadata = {
-  title: "ChatGPT Next Web",
-  description: "Your personal ChatGPT Chat Bot.",
-  appleWebApp: {
-    title: "ChatGPT Next Web",
-    statusBarStyle: "black-translucent",
-  },
-  themeColor: "#fafafa",
-};
-
 function Meta() {
   const metas = {
     version: "Azure",
