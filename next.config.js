@@ -12,25 +12,6 @@ const nextConfig = {
 
     return config;
   },
-  async redirects() {
-    if (!process.env.DOMAIN) {
-      return []
-    }
-
-    return [
-      {
-        source: '/',
-        destination: `https://${process.env.DOMAIN}/`,
-        missing: [
-          {
-            type: 'header',
-            key: 'x-azure-cdn-request'
-          },
-        ],
-        permanent: true,
-      },
-    ]
-  },
 };
 
 if (process.env.DOCKER) {
