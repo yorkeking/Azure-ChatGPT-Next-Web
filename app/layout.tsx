@@ -1,19 +1,10 @@
+"use client";
 /* eslint-disable @next/next/no-page-custom-font */
 import "./styles/globals.scss";
 import "./styles/markdown.scss";
 import "./styles/prism.scss";
-import process from "child_process";
+import { SessionProvider } from "next-auth/react";
 import { ACCESS_CODES, IS_IN_DOCKER } from "./api/access";
-
-let COMMIT_ID: string | undefined;
-try {
-  COMMIT_ID = process
-    .execSync("git rev-parse --short HEAD")
-    .toString()
-    .trim();
-} catch (e) {
-  console.error("No git or not from git repo.")
-}
 
 export const metadata = {
   title: "ChatGPT Next Web",
@@ -22,13 +13,13 @@ export const metadata = {
     title: "ChatGPT Next Web",
     statusBarStyle: "black-translucent",
   },
-  themeColor: "#fafafa"
+  themeColor: "#fafafa",
 };
 
 function Meta() {
   const metas = {
-    version: COMMIT_ID ?? "unknown",
-    access: (ACCESS_CODES.size > 0 || IS_IN_DOCKER) ? "enabled" : "disabled",
+    version: "Azure",
+    access: ACCESS_CODES.size > 0 || IS_IN_DOCKER ? "enabled" : "disabled",
   };
 
   return (
@@ -42,8 +33,10 @@ function Meta() {
 
 export default function RootLayout({
   children,
+  session,
 }: {
   children: React.ReactNode;
+  session: any;
 }) {
   return (
     <html lang="en">
@@ -62,7 +55,9 @@ export default function RootLayout({
         ></link>
         <script src="/serviceWorkerRegister.js" defer></script>
       </head>
-      <body>{children}</body>
+      <body>
+        <SessionProvider session={session}>{children}</SessionProvider>
+      </body>
     </html>
   );
 }
